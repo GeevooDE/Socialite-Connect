@@ -1,4 +1,4 @@
-# LaravelPassport
+# Geevoo OAuth2 Connector
 
 ```bash
 composer require geevoode/socialite-connect
