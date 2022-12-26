@@ -1,0 +1,9 @@
+# IDE files
+.idea
+
+# Composer files
+/vendor
+composer.lock
+
+# OS files
+.DS_Store
