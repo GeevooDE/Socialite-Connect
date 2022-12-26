@@ -1,0 +1,32 @@
+{
+    "name": "geevoode/socialite-connect",
+    "description": "Geevoo OAuth2 Provider for Laravel Socialite",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "oauth",
+        "geevoo",
+        "provider",
+        "socialite"
+    ],
+    "authors": [
+        {
+            "name": "jankrb",
+            "email": "jan.ruhfus@geevoo.de"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/geevoode/socialite-connect/issues",
+        "source": "https://github.com/geevoode/socialite-connect"
+    },
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "socialiteproviders/manager": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GeevooDE\\OAuth2\\": ""
+        }
+    }
+}
