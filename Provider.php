@@ -2,6 +2,7 @@
 
 namespace GeevooDE\OAuth2;
 
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Arr;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
@@ -14,7 +15,13 @@ class Provider extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    protected $scopes = [''];
+    protected $scopes = [
+        'user-info',
+        'user-avatar',
+        'user-address',
+        'card',
+        'qr',
+    ];
 
     /**
      * {@inheritdoc}
@@ -86,20 +93,22 @@ class Provider extends AbstractProvider
      *
      * @param array $user
      *
-     * @return \Laravel\Socialite\User
+     * @return GeevooUser
      */
     protected function mapUserToObject(array $user)
     {
         $key = $this->getConfig('userinfo_key', null);
         $data = is_null($key) === true ? $user : Arr::get($user, $key, []);
 
-        return (new User())->setRaw($data)->map([
-            'id'       => $this->getUserData($data, 'id'),
-            'first_name'     => $this->getUserData($data, 'first_name'),
-            'last_name'     => $this->getUserData($data, 'last_name'),
-            'email'    => $this->getUserData($data, 'email'),
+        return (new GeevooUser())
+            ->setRaw($data)
+            ->map([
+                'id'       => $this->getUserData($data, 'id'),
+                'first_name'     => $this->getUserData($data, 'first_name'),
+                'last_name'     => $this->getUserData($data, 'last_name'),
+                'email'    => $this->getUserData($data, 'email'),
                 'date_of_birth'    => $this->getUserData($data, 'date_of_birth'),
-        ]);
+            ]);
     }
 
     /**
@@ -118,10 +127,15 @@ class Provider extends AbstractProvider
 
     protected function getGeevooUrl($type)
     {
-        return rtrim($this->getConfig('host'), '/').'/'.ltrim(($this->getConfig($type, Arr::get([
+        # http://localhost:8000
+        return rtrim('http://localhost:8000', '/').'/'.ltrim(($this->getConfig($type, Arr::get([
             'authorize_uri' => 'oauth/authorize',
             'token_uri'     => 'oauth/token',
             'userinfo_uri'  => 'oauth/user',
+            'avatar_uri'  => 'oauth/avatar',
+            'address_uri'  => 'oauth/address',
+            'qr_uri'  => 'oauth/qr',
+            'card_uri'  => 'oauth/card',
         ], $type))), '/');
     }
 
