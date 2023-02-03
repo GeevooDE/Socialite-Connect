@@ -47,14 +47,17 @@ class GeevooUser extends User
         }
     }
 
-    public function getQr()
+    public function getQr($extended = false)
     {
-        try {
-            $response = $this->getWithAuth('http://localhost:8000/oauth/qr', [
-                'Accept' => 'image/*',
-            ]);
+        $response = $this->getWithAuth('http://localhost:8000/oauth/qr', [
+            'Accept' => 'image/*',
+        ], [
+            'detailed' => $extended,
+        ]);
 
-            return (new GeevooQr())->setResponse($response);
+        return (new GeevooQr())->setResponse($response);
+        try {
+
         } catch (ClientException|GuzzleException $e) {
             return null;
         }
@@ -76,13 +79,15 @@ class GeevooUser extends User
         return $this->date_of_birth;
     }
 
-    private function getWithAuth($url, $headers = [])
+    private function getWithAuth($url, $headers = [], $body = [])
     {
         $client = new Client();
 
         return $client->get(
             $url,
             [
+                'form_params' => $body,
+
                 RequestOptions::HEADERS => [
                     ...$headers,
                     'Authorization' => 'Bearer '.$this->token,
