@@ -36,6 +36,7 @@ class Provider extends AbstractProvider
             'user_first_name',
             'user_last_name',
             'user_email',
+            'user_date_of_birth',
             'guzzle',
         ];
     }
@@ -97,6 +98,7 @@ class Provider extends AbstractProvider
             'first_name'     => $this->getUserData($data, 'first_name'),
             'last_name'     => $this->getUserData($data, 'last_name'),
             'email'    => $this->getUserData($data, 'email'),
+                'date_of_birth'    => $this->getUserData($data, 'date_of_birth'),
         ]);
     }
 
