@@ -46,7 +46,17 @@ return Socialite::driver('geevoo')->redirect();
 ### Returned User fields
 
 - ``id``
-- ``nickname``
 - ``name``
 - ``email``
 - ``avatar``
+- ``date_of_birth``
+
+### Scopes
+
+| Scope        | Description                                                                                   |
+|--------------|-----------------------------------------------------------------------------------------------|
+| user-info    | (Default scope) Get personal information of user such as id, name, email & date of birth.     |
+| user-avatar  | Get user avatar if present. Only available using the method ``$user->getAvatar()``.           |
+| user-address | Get user address if present. Only available using the method ``$user->getAddress()``.         |
+| card         | Get user student card. Only available using the method ``$user->getCard()``.                  |
+| qr           | Generate a student qr code. Only available using the method ``$user->getQr(bool $extended)``. |
