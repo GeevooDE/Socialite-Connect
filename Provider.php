@@ -33,10 +33,9 @@ class Provider extends AbstractProvider
             'userinfo_uri',
             'userinfo_key',
             'user_id',
-            'user_nickname',
-            'user_name',
+            'user_first_name',
+            'user_last_name',
             'user_email',
-            'user_avatar',
             'guzzle',
         ];
     }
@@ -95,10 +94,9 @@ class Provider extends AbstractProvider
 
         return (new User())->setRaw($data)->map([
             'id'       => $this->getUserData($data, 'id'),
-            'nickname' => $this->getUserData($data, 'nickname'),
-            'name'     => $this->getUserData($data, 'name'),
+            'first_name'     => $this->getUserData($data, 'first_name'),
+            'last_name'     => $this->getUserData($data, 'last_name'),
             'email'    => $this->getUserData($data, 'email'),
-            'avatar'   => $this->getUserData($data, 'avatar'),
         ]);
     }
 
