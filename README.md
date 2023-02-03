@@ -17,7 +17,6 @@ This is a fork from @SocialiteProviders (https://github.com/SocialiteProviders/L
   'client_id' => env('GEEVOO_CLIENT_ID'),  
   'client_secret' => env('GEEVOO_CLIENT_SECRET'),  
   'redirect' => env('GEEVOO_REDIRECT_URI'),
-  'host' => env('GEEVOO_HOST'),
 ],
 ```
 
