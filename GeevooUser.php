@@ -56,11 +56,6 @@ class GeevooUser extends User
         ]);
 
         return (new GeevooQr())->setResponse($response);
-        try {
-
-        } catch (ClientException|GuzzleException $e) {
-            return null;
-        }
     }
 
     public function getAddress()
